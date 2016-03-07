@@ -9,13 +9,16 @@ However, the new flush strategy may result in data being overlooked when examini
 
 # Experimental testing
 The following experiment was conducted to verify the correctness of the findings:
+
 1. A virtual machine with a Windows 8.1 operating system was set up.
 2. This virtual machine was powered off after the installation using the following command: «shutdown /t 0 /s» (the command initiates the full shutdown, not the hybrid one).
 3. The following files were copied from the virtual machine to record the before state (the first file in the list is the primary file, other files are transaction log files):
+
     * C:\Windows\System32\config\SYSTEM
     * C:\Windows\System32\config\SYSTEM.LOG
     * C:\Windows\System32\config\SYSTEM.LOG1
     * C:\Windows\System32\config\SYSTEM.LOG2
+
 4. The virtual machine was started again.
 5. Once the operating system finished booting, the Regedit program was launched, and the «testAAAA» key was created in the root of the System hive. The Regedit program was closed after this.
 6. The user activity was simulated.
@@ -26,12 +29,14 @@ The following experiment was conducted to verify the correctness of the findings
 
 ## Results
 The following results were obtained after comparing the files copied:
+
 1. The contents of the «SYSTEM» file did change.
 2. The contents of the «SYSTEM.LOG» file didn't change (in fact, this file is empty).
 3. The contents of the «SYSTEM.LOG1» file did change.
 4. The contents of the «SYSTEM.LOG2» file didn't change.
 
 The following changes were observed in the «SYSTEM» file:
+
 1. The byte at offset 4 is 0xCE in the before state and 0xCF in the after state.
 2. The byte at offset 144 is 0x00 in the before state and 0x01 in the after state.
 
