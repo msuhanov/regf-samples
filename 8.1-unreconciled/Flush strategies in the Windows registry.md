@@ -12,7 +12,7 @@ The following experiment was conducted to verify the correctness of the findings
 
 1. A virtual machine with a Windows 8.1 operating system was set up.
 2. This virtual machine was powered off after the installation using the following command: «shutdown /t 0 /s» (the command initiates the full shutdown, not the hybrid one).
-3. The following files were copied from the virtual machine to record the before state (the first file in the list is the primary file, other files are transaction log files):
+3. The following files were copied from the virtual machine to record the *before* state (the first file in the list is the primary file, other files are transaction log files):
 
     * C:\Windows\System32\config\SYSTEM
     * C:\Windows\System32\config\SYSTEM.LOG
@@ -25,7 +25,7 @@ The following experiment was conducted to verify the correctness of the findings
 7. Approximately 16 minutes after the boot, the Regedit program was launched again, and the «testBBBB» key was created in the root of the System hive. The Regedit program was closed after this.
 8. The user activity was simulated.
 9. Approximately 45 minutes after the boot, the hybrid shutdown was initiated from the Start screen. The virtual machine was powered off.
-10. The files whose paths are mentioned above were copied from the virtual machine to record the after state.
+10. The files whose paths are mentioned above were copied from the virtual machine to record the *after* state.
 
 ## Results
 The following results were obtained after comparing the files copied:
@@ -37,17 +37,17 @@ The following results were obtained after comparing the files copied:
 
 The following changes were observed in the «SYSTEM» file:
 
-1. The byte at offset 4 is 0xCE in the before state and 0xCF in the after state.
-2. The byte at offset 144 is 0x00 in the before state and 0x01 in the after state.
+1. The byte at offset 4 is 0xCE in the *before* state and 0xCF in the *after* state.
+2. The byte at offset 144 is 0x00 in the *before* state and 0x01 in the *after* state.
 
-As expected, there are no signs of the «testAAAA» and «testBBBB» keys in both states of the «SYSTEM» file. However, signs of these keys were found in the «SYSTEM.LOG1» file (the after state only). The contents of the «SYSTEM.LOG1» file did change cardinally between the states.
+As expected, there are no signs of the «testAAAA» and «testBBBB» keys in both states of the «SYSTEM» file. However, signs of these keys were found in the «SYSTEM.LOG1» file (the *after* state only). The contents of the «SYSTEM.LOG1» file did change cardinally between the states.
 
-In the before state, the «SYSTEM.LOG1» file has 9 log entries (0xC5-0xCD). In the after state, the same file has 32 log entries (0xCE-0xED). The «testAAAA» key is first seen in the log entry numbered 0xD5. The «testBBBB» key is seen in the log entry numbered 0xDF. The difference between the last written timestamps of these two keys is 948 seconds (approximately 16 minutes).
+In the *before* state, the «SYSTEM.LOG1» file has 9 log entries (0xC5-0xCD). In the *after* state, the same file has 32 log entries (0xCE-0xED). The «testAAAA» key is first seen in the log entry numbered 0xD5. The «testBBBB» key is seen in the log entry numbered 0xDF. The difference between the last written timestamps of these two keys is 948 seconds (approximately 16 minutes).
 
 These results match what was expected.
 
 ## Registry files
-The before and after states of the «SYSTEM», «SYSTEM.LOG», «SYSTEM.LOG1», and «SYSTEM.LOG2» files are available for an examination on GitHub in this directory.
+The *before* and *after* states of the «SYSTEM», «SYSTEM.LOG», «SYSTEM.LOG1», and «SYSTEM.LOG2» files are available for an examination on GitHub in this directory.
 
 # Conclusions
 When dealing with registry files from Windows 8.1, Windows Server 2012 R2, or Windows 10, a computer forensic examiner needs to take into account data in transaction log files. Without looking at transaction log files, an examiner may not see the latest changes happened to the registry.
