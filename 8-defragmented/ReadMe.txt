@@ -1,0 +1,1 @@
+This directory contains a renamed transaction log file of a defragmented hive. This file was copied from a Windows 8 operating system installation in a virtual machine right after the defragmentation.
