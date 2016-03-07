@@ -42,7 +42,7 @@ In the before state, the «SYSTEM.LOG1» file has 9 log entries (0xC5-0xCD). In 
 These results match what was expected.
 
 ## Registry files
-The before and after states of the «SYSTEM», «SYSTEM.LOG», «SYSTEM.LOG1», and «SYSTEM.LOG2» files are avaliable for an examination on GitHub in this directory.
+The before and after states of the «SYSTEM», «SYSTEM.LOG», «SYSTEM.LOG1», and «SYSTEM.LOG2» files are available for an examination on GitHub in this directory.
 
 # Conclusions
 When dealing with registry files from Windows 8.1, Windows Server 2012 R2, or Windows 10, a computer forensic examiner needs to take into account data in transaction log files. Without looking at transaction log files, an examiner may not see the latest changes happened to the registry.
