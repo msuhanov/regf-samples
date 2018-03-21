@@ -28,7 +28,7 @@ As shown above, the first log entry to be applied to a dirty primary file may co
 As a result, since a primary file contains more recent data than log entries to be applied first, these log entries will bring the hive to the "previous state" when applied. And this "previous state" of the hive may be inconsistent, because not all pages contain "previous data".
 
 # Experimental testing
-The test was conducted using an Insider Preview build of Windows 10 "Redstone 4" installed in a virtual machine. The operating system installation was running a program calling the *RegFlushKey()* function for the SOFTWARE hive in an infinite loop (to generate many log entries within a short time-frame). On a host machine, scripts to extract and analyze the SOFTWARE, SOFTWARE.LOG1, and SOFTWARE.LOG2 files from the *\Windows\System32\config\* directory (using The Sleuth Kit) were launched after the guest operating system has finished booting.
+The test was conducted using an Insider Preview build of Windows 10 "Redstone 4" installed in a virtual machine. The operating system installation was running a program calling the *RegFlushKey()* function for the SOFTWARE hive in an infinite loop (to generate many log entries within a short time-frame). On a host machine, scripts to extract and analyze the SOFTWARE, SOFTWARE.LOG1, and SOFTWARE.LOG2 files from the \Windows\System32\config\ directory (using The Sleuth Kit) were launched after the guest operating system has finished booting.
 
 The following effects had been observed:
 * The hive writer was initially using the SOFTWARE.LOG1 file to store log entries.
