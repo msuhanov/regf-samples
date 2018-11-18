@@ -107,7 +107,7 @@ Traceback (most recent call last):
     raise CellOffsetException('There is no valid cell starting at this offset (relative): {}'.format(cell_relative_offset))
 yarp.RegistryFile.CellOffsetException: 'There is no valid cell starting at this offset (relative): 66375664'
 ```
-* Applying all log entries from the SOFTWARE.LOG2 file to the SOFTWARE file taken from the *before* state results in the same hive bins data as present in the SOFTWARE file taken from the *after* state:
+* Applying all log entries from the SOFTWARE.LOG2 file (taken from the *after* state) to the SOFTWARE file taken from the *before* state results in the same hive bins data as present in the SOFTWARE file taken from the *after* state:
 ```python
 >>> from yarp import *
 >>> from io import BytesIO
